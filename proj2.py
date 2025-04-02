@@ -1,3 +1,4 @@
+import sys
 import ply.lex as lex
 import ply.yacc as yacc
 
@@ -155,52 +156,24 @@ def converter_com_ply(entrada):
     except Exception as e:
         return f"Erro durante a conversão: {e}"
 
-# Seu texto de entrada (mantido)
-entrada = """module(Sistema de Controle Predial) {
-	case 'Alterar Empresa' as AE,
-	case 'Consultar Empresa' as CoE,
-	case 'Efetuar Login' as EL,
-	case 'Cadastrar Empresa' as CaE,
-	case 'Excluir Empresa' as EE,
-	case '<<CRUD>> Manter Usuário' as CMU,
-	case 'Enviar Acessos' as EA,
-	case 'Enviar Temperaturas' as ET,
-}
 
-module(Sistema de Catraca){
-	case 'Acessar Catraca' as AC,
-	case 'Consultar Acessos' as CA,
-}
-
-module(Sistema de ArCondicionado){
-	case 'Medir Temperatura' as MT,
-}
-
-actor 'Funcionário' as F;
-actor 'Atendente' as A;
-actor 'Síndico' as S;
-actor 'Sistema de Catraca' as SC;
-actor 'Sistema de Ar Condicionado' as SAC;
-actor 'Sistema de Controle Predial' as SCP;
-
-EA -> SC
-ET -> SAC
-MT -> SCP
-
-S ->> A
-A ->>F
-
-F -- AE
-F -- CoE
-F -- EL
-F -- AC
-A -- CaE
-A -- EE
-A -- CMU
-A -- EA
-S -- CA
-S -- ET
-"""
-
-plantuml_gerado_ply = converter_com_ply(entrada)
-print(plantuml_gerado_ply)
+def main():
+    if len(sys.argv) != 2:
+        print("Uso: python proj2.py <entrada>")
+        sys.exit(1)
+        
+    input_file = sys.argv[1]
+    
+    try:
+        with open(input_file, 'r') as file:
+            entrada = file.read()
+            
+        plantuml_gerado_ply = converter_com_ply(entrada)
+        
+        print(plantuml_gerado_ply)
+    except FileNotFoundError:
+        print(f"Arquivo '{input_file}' não encontrado.")
+        sys.exit(1)
+        
+if __name__ == "__main__":
+    main()

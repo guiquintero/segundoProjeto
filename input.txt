@@ -1,0 +1,44 @@
+module(Sistema de Controle Predial) {
+	case 'Alterar Empresa' as AE,
+	case 'Consultar Empresa' as CoE,
+	case 'Efetuar Login' as EL,
+	case 'Cadastrar Empresa' as CaE,
+	case 'Excluir Empresa' as EE,
+	case '<<CRUD>> Manter Usuário' as CMU,
+	case 'Enviar Acessos' as EA,
+	case 'Enviar Temperaturas' as ET,
+}
+
+module(Sistema de Catraca){
+	case 'Acessar Catraca' as AC,
+	case 'Consultar Acessos' as CA,
+}
+
+module(Sistema de ArCondicionado){
+	case 'Medir Temperatura' as MT,
+}
+
+actor 'Funcionário' as F;
+actor 'Atendente' as A;
+actor 'Síndico' as S;
+actor 'Sistema de Catraca' as SC;
+actor 'Sistema de Ar Condicionado' as SAC;
+actor 'Sistema de Controle Predial' as SCP;
+
+EA -> SC
+ET -> SAC
+MT -> SCP
+
+S ->> A
+A ->>F
+
+F -- AE
+F -- CoE
+F -- EL
+F -- AC
+A -- CaE
+A -- EE
+A -- CMU
+A -- EA
+S -- CA
+S -- ET
