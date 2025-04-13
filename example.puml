@@ -11,7 +11,7 @@ package "Hospital Reception" {
     usecase "File Medical Reports" as FMR
     usecase "Outpatient Hospital Admission" as OHA
     usecase "Inpatient Hospital Admission" as IHA
-    usecase "Bed Allotment" as BA
+    usecase "Bed Allotment"
 }
 
 "Receptionist" -- "Schedule Patient Appointment"
@@ -23,7 +23,7 @@ package "Hospital Reception" {
 PR ..> SPHA : <<extend>>
 PR ..> "Schedule Patient Appointment" : <<extend>>
 PHA ..> PR : <<include>>
-IHA ..> BA : <<include>>
+IHA ..> "Bed Allotment" : <<include>>
 OHA ..|> PHA
 IHA ..|> PHA
 @enduml

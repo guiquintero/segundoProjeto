@@ -7,7 +7,7 @@ module("Hospital Reception"){
 	case 'File Medical Reports' as FMR,
 	case 'Outpatient Hospital Admission' as OHA,
 	case 'Inpatient Hospital Admission' as IHA,
-	case 'Bed Allotment' as BA
+	case 'Bed Allotment'
 }
 
 actor 'Receptionist';
@@ -21,6 +21,6 @@ actor 'Receptionist';
 PR -e> SPHA
 PR -e> 'Schedule Patient Appointment'
 PHA -i> PR
-IHA -i> BA
+IHA -i> 'Bed Allotment'
 OHA ->> PHA
 IHA ->> PHA
